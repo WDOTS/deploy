@@ -10,18 +10,31 @@ var handler = webhookHandler({ path: "/deploy", secret: "james" });
     try {
       var doc = yaml.safeLoad(fs.readFileSync('.deploy.yml', 'utf8'));
       console.log(doc);
+
+      if (doc.config !== undefined && doc.config.port !== undefined &&
+        doc.config.path !== undefined && doc.config.secret !== undefined) {
+
+      } else {
+        callback({
+          message: "Malformed .deploy.yml."
+        });
+      }
     } catch (e) {
-      callback(e);
+      var msg = e;
+
+      if (e.code == "ENOENT") {
+        msg = "Cannot find .deploy.yml";
+      }
+
+      callback({
+        message: msg
+      }, undefined);
     }
   }
 
-  readConfig(function(err) {
+  readConfig(function(err, data) {
     if (err) {
-      if (err.code === "ENOENT") {
-        console.log("Cannot find .deploy.yml");
-      } else {
-        console.log(err);
-      }
+      console.log(err.message);
     }
   });
 })();
