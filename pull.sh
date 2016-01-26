@@ -3,6 +3,7 @@
 echo "Pulling from repo..."
 
 # Change directory to ../wdots-website
+# (this dir change is only for the purpose of this script.. it is reverted when the script is over)
 cd ../wdots-website
 
 # Stop the wdots-website pm2 service
