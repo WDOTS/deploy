@@ -3,8 +3,6 @@ var webhookHandler = require('github-webhook-handler');
 var yaml = require('js-yaml');
 var fs = require('fs');
 
-var handler = webhookHandler({ path: "/deploy", secret: "james" });
-
 (function() {
   function readConfig(callback) {
     try {
@@ -31,7 +29,16 @@ var handler = webhookHandler({ path: "/deploy", secret: "james" });
   }
 
   function openHook(port, path, secret) {
+    var handler = webhookHandler({ path: path, secret: secret });
 
+    http.createServer(function (req, res) {
+      handler(req, res, function (err) {
+        res.statusCode = 404;
+        res.end('no such location');
+      });
+    }).listen(port, function() {
+      console.log("listening on *:" + port);
+    });
   }
 
   readConfig(function(err, data) {
