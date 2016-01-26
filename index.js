@@ -49,6 +49,10 @@ var fs = require('fs');
         event.payload.repository.name,
         event.payload.ref);
     });
+
+    handler.on('ping', function (event) {
+      console.log('Ping has been received... ' + event.zen);
+    });
   }
 
   readConfig(function(err, data) {
