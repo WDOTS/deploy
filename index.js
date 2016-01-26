@@ -5,6 +5,14 @@ var fs = require('fs');
 
 var handler = webhookHandler({ path: "/deploy", secret: "james" });
 
+(function() {
+  function onLoad() {
+    
+  }
+
+  onLoad();
+})();
+
 http.createServer(function (req, res) {
   handler(req, res, function (err) {
     res.statusCode = 404;
