@@ -50,13 +50,41 @@ var spawn = require('child_process').spawn;
         event.payload.repository.name,
         event.payload.ref);
 
-      spawn('sh', ['pull.sh']);
+      var sh = spawn('sh', ['pull.sh']);
+
+      sh.stdout.on('data', function (data) {
+        console.log("stdout:");
+        console.log(data);
+      });
+
+      sh.stderr.on('data', function (data) {
+        console.log("stderr:");
+        console.log(data);
+      });
+
+      sh.on('close', function (code) {
+        console.log("exited: " + code);
+      });
     });
 
     handler.on('ping', function (event) {
       console.log('Ping has been received... ' + event.payload.zen);
 
-      spawn('sh', ['pull.sh']);
+      var sh = spawn('sh', ['pull.sh']);
+
+      sh.stdout.on('data', function (data) {
+        console.log("stdout:");
+        console.log(data);
+      });
+
+      sh.stderr.on('data', function (data) {
+        console.log("stderr:");
+        console.log(data);
+      });
+
+      sh.on('close', function (code) {
+        console.log("exited: " + code);
+      });
     });
   }
 
