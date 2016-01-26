@@ -29,6 +29,23 @@ var spawn = require('child_process').spawn;
     }
   }
 
+  function runScript() {
+    var sh = spawn('sh', ['pull.sh']);
+
+    sh.stdout.on('data', function (data) {
+      console.log(data.toString());
+    });
+
+    sh.stderr.on('data', function (data) {
+      console.log("ERROR!!!:");
+      console.log(data.toString());
+    });
+
+    sh.on('close', function (code) {
+      console.log("script exited with code: " + code);
+    });
+  }
+
   function openHook(port, path, secret) {
     var handler = webhookHandler({ path: path, secret: secret });
 
@@ -50,41 +67,13 @@ var spawn = require('child_process').spawn;
         event.payload.repository.name,
         event.payload.ref);
 
-      var sh = spawn('sh', ['pull.sh']);
-
-      sh.stdout.on('data', function (data) {
-        console.log("stdout:");
-        console.log(data.toString());
-      });
-
-      sh.stderr.on('data', function (data) {
-        console.log("stderr:");
-        console.log(data.toString());
-      });
-
-      sh.on('close', function (code) {
-        console.log("exited: " + code);
-      });
+      runScript();
     });
 
     handler.on('ping', function (event) {
       console.log('Ping has been received... ' + event.payload.zen);
 
-      var sh = spawn('sh', ['pull.sh']);
-
-      sh.stdout.on('data', function (data) {
-        console.log("stdout:");
-        console.log(data.toString());
-      });
-
-      sh.stderr.on('data', function (data) {
-        console.log("stderr:");
-        console.log(data.toString());
-      });
-
-      sh.on('close', function (code) {
-        console.log("exited: " + code);
-      });
+      runScript();
     });
   }
 
