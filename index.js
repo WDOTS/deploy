@@ -6,16 +6,20 @@ var fs = require('fs');
 var handler = webhookHandler({ path: "/deploy", secret: "james" });
 
 (function() {
-  function onLoad() {
+  function onLoad(callback) {
     try {
       var doc = yaml.safeLoad(fs.readFileSync('.deploy.yml', 'utf8'));
       console.log(doc);
     } catch (e) {
-      console.log(e);
+      callback(e);
     }
   }
 
-  onLoad();
+  onLoad(function(err) {
+    if (err) {
+      console.log(err);
+    }
+  });
 })();
 
 http.createServer(function (req, res) {
