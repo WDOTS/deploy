@@ -51,7 +51,7 @@ var fs = require('fs');
     });
 
     handler.on('ping', function (event) {
-      console.log('Ping has been received... ' + JSON.stringify(event, null, 4));
+      console.log('Ping has been received... ' + event.payload.zen);
     });
   }
 
