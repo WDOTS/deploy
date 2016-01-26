@@ -17,7 +17,11 @@ var handler = webhookHandler({ path: "/deploy", secret: "james" });
 
   onLoad(function(err) {
     if (err) {
-      console.log(err);
+      if (err.code === "ENOENT") {
+        console.log("Cannot find .deploy.yml");
+      } else {
+        console.log(err);
+      }
     }
   });
 })();
