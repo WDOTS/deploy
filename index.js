@@ -6,7 +6,7 @@ var fs = require('fs');
 var handler = webhookHandler({ path: "/deploy", secret: "james" });
 
 (function() {
-  function onLoad(callback) {
+  function readConfig(callback) {
     try {
       var doc = yaml.safeLoad(fs.readFileSync('.deploy.yml', 'utf8'));
       console.log(doc);
@@ -15,7 +15,7 @@ var handler = webhookHandler({ path: "/deploy", secret: "james" });
     }
   }
 
-  onLoad(function(err) {
+  readConfig(function(err) {
     if (err) {
       if (err.code === "ENOENT") {
         console.log("Cannot find .deploy.yml");
