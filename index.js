@@ -26,6 +26,7 @@ var handler = webhookHandler({ path: "/deploy", secret: "james" });
   });
 })();
 
+/*
 http.createServer(function (req, res) {
   handler(req, res, function (err) {
     res.statusCode = 404;
@@ -44,3 +45,4 @@ handler.on('push', function (event) {
     event.payload.repository.name,
     event.payload.ref);
 });
+*/
