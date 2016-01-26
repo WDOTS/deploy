@@ -1,5 +1,7 @@
 var http = require('http');
 var webhookHandler = require('github-webhook-handler');
+var yaml = require('js-yaml');
+
 var handler = webhookHandler({ path: "/deploy", secret: "james" });
 
 http.createServer(function (req, res) {
