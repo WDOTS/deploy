@@ -2,6 +2,7 @@ var http = require('http');
 var webhookHandler = require('github-webhook-handler');
 var yaml = require('js-yaml');
 var fs = require('fs');
+var spawn = require('child_process').spawn;
 
 (function() {
   function readConfig(callback) {
@@ -48,10 +49,14 @@ var fs = require('fs');
       console.log('Received a push event for %s to %s',
         event.payload.repository.name,
         event.payload.ref);
+
+      spawn('sh', ['pull.sh']);
     });
 
     handler.on('ping', function (event) {
       console.log('Ping has been received... ' + event.payload.zen);
+
+      spawn('sh', ['pull.sh']);
     });
   }
 
