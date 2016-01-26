@@ -10,3 +10,7 @@ http.createServer(function (req, res) {
 }).listen(1996, function() {
   console.log("listening on 1996");
 });
+
+handler.on('error', function (err) {
+  console.error('Error:', err.message)
+});
