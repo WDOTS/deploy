@@ -6,6 +6,8 @@ var fs = require('fs');
 var handler = webhookHandler({ path: "/deploy", secret: "james" });
 
 (function() {
+  var DEPLOY_PORT, DEPLOY_PATH, DEPLOY_SECRET;
+
   function readConfig(callback) {
     try {
       var doc = yaml.safeLoad(fs.readFileSync('.deploy.yml', 'utf8'));
@@ -13,7 +15,9 @@ var handler = webhookHandler({ path: "/deploy", secret: "james" });
 
       if (doc.config !== undefined && doc.config.port !== undefined &&
         doc.config.path !== undefined && doc.config.secret !== undefined) {
-
+          DEPLOY_PORT = doc.config.port;
+          DEPLOY_PATH = doc.config.path;
+          DEPLOY_SECRET = doc.config.secret;
       } else {
         callback({
           message: "Malformed .deploy.yml."
@@ -28,7 +32,7 @@ var handler = webhookHandler({ path: "/deploy", secret: "james" });
 
       callback({
         message: msg
-      }, undefined);
+      });
     }
   }
 
