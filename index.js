@@ -54,12 +54,12 @@ var spawn = require('child_process').spawn;
 
       sh.stdout.on('data', function (data) {
         console.log("stdout:");
-        console.log(data);
+        console.log(data.toString());
       });
 
       sh.stderr.on('data', function (data) {
         console.log("stderr:");
-        console.log(data);
+        console.log(data.toString());
       });
 
       sh.on('close', function (code) {
@@ -74,12 +74,12 @@ var spawn = require('child_process').spawn;
 
       sh.stdout.on('data', function (data) {
         console.log("stdout:");
-        console.log(data);
+        console.log(data.toString());
       });
 
       sh.stderr.on('data', function (data) {
         console.log("stderr:");
-        console.log(data);
+        console.log(data.toString());
       });
 
       sh.on('close', function (code) {
