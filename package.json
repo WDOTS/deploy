@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/WDOTS/deploy",
   "dependencies": {
+    "chimneypot": "^0.5.0",
     "github-webhook-handler": "^0.5.0",
     "js-yaml": "^3.5.2"
   }
