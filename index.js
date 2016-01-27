@@ -48,6 +48,12 @@ var chimneypot = require('chimneypot');
   }
 
   function openHook(port, path, secret) {
+    var pot = new chimneypot({
+      port: port,
+      path: path,
+      secret: secret
+    });
+
     var handler = webhookHandler({ path: path, secret: secret });
 
     http.createServer(function (req, res) {
