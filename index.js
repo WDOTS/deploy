@@ -47,48 +47,15 @@ var chimneypot = require('chimneypot');
     });
   }
 
-  function openHook(port, path, secret) {
-    var pot = new chimneypot({
-      port: port,
-      path: path,
-      secret: secret
-    });
-
-    var handler = webhookHandler({ path: path, secret: secret });
-
-    http.createServer(function (req, res) {
-      handler(req, res, function (err) {
-        res.statusCode = 404;
-        res.end('no such location');
-      });
-    }).listen(port, function() {
-      console.log("listening on *:" + port);
-    });
-
-    handler.on('error', function (err) {
-      console.error('Error:', err.message);
-    });
-
-    handler.on('push', function (event) {
-      console.log('Received a push event for %s to %s',
-        event.payload.repository.name,
-        event.payload.ref);
-
-      runScript();
-    });
-
-    handler.on('ping', function (event) {
-      console.log('Ping has been received... ' + event.payload.zen);
-
-      runScript();
-    });
-  }
-
   readConfig(function(err, data) {
     if (err) {
       console.log(err.message);
     } else {
-      openHook(data.port, data.path, data.secret);
+      var pot = new chimneypot({
+        port: data.port,
+        path: data.path,
+        secret: data.secret
+      });
     }
   });
 })();
