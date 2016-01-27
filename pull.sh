@@ -16,4 +16,4 @@ git pull
 npm install
 
 # Start index.js with the name wdots-website
-pm2 start index.js --name wdots-website
+pm2 start index.js --name wdots-website -- --port 80
