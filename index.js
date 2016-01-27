@@ -3,6 +3,7 @@ var webhookHandler = require('github-webhook-handler');
 var yaml = require('js-yaml');
 var fs = require('fs');
 var spawn = require('child_process').spawn;
+var chimneypot = require('chimneypot');
 
 (function() {
   function readConfig(callback) {
