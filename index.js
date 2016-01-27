@@ -56,6 +56,12 @@ var chimneypot = require('chimneypot');
         path: data.path,
         secret: data.secret
       });
+
+      pot.route('push', function (event) {
+        runScript();
+      });
+
+      pot.listen();
     }
   });
 })();
