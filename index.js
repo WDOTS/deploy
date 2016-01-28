@@ -6,16 +6,13 @@ var chimneypot = require('chimneypot');
 
 (function() {
   function readConfig(callback) {
-    try {
-      var doc = yaml.safeLoad(fs.readFileSync('.deploy.yml', 'utf8'));
-      if (doc.config !== undefined && doc.config.port !== undefined &&
-        doc.config.path !== undefined && doc.config.secret !== undefined) {
-          callback(undefined, doc.config);
-      } else {
-        callback("Malformed .deploy.yml.", undefined);
-      }
-    } catch (e) {
-      callback(e, undefined);
+    var doc = yaml.safeLoad(fs.readFileSync('.deploy.yml', 'utf8'));
+
+    if (doc.config !== undefined && doc.config.port !== undefined &&
+      doc.config.path !== undefined && doc.config.secret !== undefined) {
+        callback(undefined, doc.config);
+    } else {
+      callback("Malformed .deploy.yml.", undefined);
     }
   }
 
