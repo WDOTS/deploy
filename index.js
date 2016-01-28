@@ -11,6 +11,8 @@ var chimneypot = require('chimneypot');
       doc.config.path !== undefined && doc.config.secret !== undefined) {
         return doc.config;
     }
+
+    throw new Error("Error parsing .deploy.yml");
   }
 
   var config = getConfig();
