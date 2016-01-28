@@ -30,23 +30,6 @@ var chimneypot = require('chimneypot');
     }
   }
 
-  function runScript() {
-    var sh = spawn('sh', ['pull.sh']);
-
-    sh.stdout.on('data', function (data) {
-      console.log(data.toString());
-    });
-
-    sh.stderr.on('data', function (data) {
-      console.log("ERROR!!!:");
-      console.log(data.toString());
-    });
-
-    sh.on('close', function (code) {
-      console.log("script exited with code: " + code);
-    });
-  }
-
   readConfig(function(err, data) {
     if (err) {
       console.log(err.message);
