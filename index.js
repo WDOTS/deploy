@@ -13,26 +13,16 @@ var chimneypot = require('chimneypot');
         doc.config.path !== undefined && doc.config.secret !== undefined) {
           callback(undefined, doc.config);
       } else {
-        callback({
-          message: "Malformed .deploy.yml."
-        }, undefined);
+        callback("Malformed .deploy.yml.", undefined);
       }
     } catch (e) {
-      var msg = e;
-
-      if (e.code == "ENOENT") {
-        msg = "Cannot find .deploy.yml";
-      }
-
-      callback({
-        message: msg
-      }, undefined);
+      callback(e, undefined);
     }
   }
 
   readConfig(function(err, data) {
     if (err) {
-      console.log(err.message);
+      console.log(err);
     } else {
       var pot = new chimneypot({
         port: data.port,
