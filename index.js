@@ -16,4 +16,9 @@ var chimneypot = require('chimneypot');
 
   var config = getConfig();
 
+  var pot = new chimneypot({
+    port: config.port,
+    path: config.path,
+    secret: config.secret
+  });
 })();
