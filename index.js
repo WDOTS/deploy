@@ -21,4 +21,8 @@ var chimneypot = require('chimneypot');
     path: config.path,
     secret: config.secret
   });
+
+  pot.route('push', function(event) {
+    spawn('sh', ['pull.sh']);
+  });
 })();
