@@ -15,8 +15,5 @@ git pull
 # Install npm dependencies
 npm install
 
-# Build the assets
-npm run build
-
-# Start index.js with the name wdots-website
-pm2 start index.js --name wdots-website -- --port 80
+# Run "npm start --port 80" with pm2
+pm2 start "/usr/local/bin/npm" --name wdots-website -- start --port 80
