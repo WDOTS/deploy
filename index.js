@@ -58,7 +58,7 @@ var chimneypot = require('chimneypot');
       });
 
       pot.route('push', function (event) {
-        runScript();
+        spawn('sh', ['pull.sh']);
       });
 
       pot.listen();
