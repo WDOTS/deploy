@@ -1,4 +1,3 @@
-var http = require('http');
 var yaml = require('js-yaml');
 var fs = require('fs');
 var spawn = require('child_process').spawn;
