@@ -12,6 +12,9 @@ pm2 stop wdots-website
 # Pull the changes from git
 git pull
 
+# Clear down node_modules
+rm -rf node_modules
+
 # Install npm dependencies
 npm install
 
